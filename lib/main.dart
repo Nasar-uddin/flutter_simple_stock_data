@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:stock_data/screens/chart_test.dart';
 import 'package:stock_data/screens/details_data_screen.dart';
 import 'package:stock_data/screens/home_screen.dart';
+import 'package:stock_data/screens/trade_code_list_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: HomeScreen.routeName,
       routes: {
-        ChartTest.routeName : (context) => ChartTest(),
         HomeScreen.routeName : (context)=> HomeScreen(),
+        TradeCodeList.routeName : (context) => TradeCodeList(),
         DetailsView.routeName : (context) => DetailsView()
       },
     );
