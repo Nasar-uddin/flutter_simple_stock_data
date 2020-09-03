@@ -9,7 +9,6 @@ class HomeScreen extends StatelessWidget {
   final _dbRef = FirebaseDatabase.instance.reference();
   @override
   Widget build(BuildContext context) {
-    // firebaseTest();
     List<Map> data = [];
     return Scaffold(
       appBar: AppBar(
@@ -26,21 +25,19 @@ class HomeScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: FutureBuilder(
-          future: _dbRef.child(_path).limitToFirst(500).once(),
+          // as it is very long list I limit the table data to 2000
+          future: _dbRef.child(_path).limitToFirst(2000).once(),
           builder: (context, AsyncSnapshot<DataSnapshot> snapshot) {
             switch (snapshot.connectionState) {
               case (ConnectionState.waiting):
                 return Center(child: SpinKitCubeGrid(color: Colors.blueAccent));
               case (ConnectionState.done):
                 if (snapshot.hasData) {
-                  // print(snapshot.data.value);
-
                   
                   snapshot.data.value.forEach((d){
                     data.add(d);
                     // print(d);
                   });
-                  // print(data);
                   return Column(
                     children: [
                       Container(

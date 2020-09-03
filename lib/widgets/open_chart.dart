@@ -3,50 +3,103 @@ import 'package:stock_data/models/company.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 
-class OpenChart extends StatelessWidget {
+class OpenChart extends StatefulWidget {
   final List<Company> companies;
   OpenChart(this.companies);
 
   @override
+  _OpenChartState createState() => _OpenChartState();
+}
+
+class _OpenChartState extends State<OpenChart> {
+  String activeGraph = 'open';
+  @override
   Widget build(BuildContext context) {
-    return charts.LineChart(_lineChart(),animate: !true);
+    return Column(
+      children: [
+        Expanded(
+          child: charts.LineChart(_lineChart(),animate: true),
+        ),
+        Container(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FlatButton(
+                  child: Text('Open'),
+                  onPressed: (){
+                    setState(() {
+                      activeGraph = 'open';
+                    });
+                  },
+                ),
+                FlatButton(
+                  child: Text('Close'),
+                  onPressed: (){
+                    setState(() {
+                      activeGraph = 'close';
+                    });
+                  },
+                ),
+                FlatButton(
+                  child: Text('High'),
+                  onPressed: (){
+                    setState(() {
+                      activeGraph = 'high';
+                    });
+                  },
+                ),FlatButton(
+                  child: Text('Volume'),
+                  onPressed: (){
+                    setState(() {
+                      activeGraph = 'volume';
+                    });
+                  },
+                )
+              ],
+            ),
+          ),
+        ),
+        
+      ],
+    );
   }
 
-  Container timeData() {
-    return Container(
-    child: charts.TimeSeriesChart([
-                charts.Series<Company, DateTime>(
-                    data: companies,
-                    id: 'Open',
-                    domainFn: (Company cmp, _) => cmp.date,
-                    measureFn: (Company cmp, _) => cmp.open
-                  )
-              ], animate: false),
-  );
-  }
   List<charts.Series<Company,int>> _lineChart(){
-    
-    return [
-      charts.Series<Company,int>(
-        data: companies,
+    switch(activeGraph){
+      case('open'):
+        return [
+        charts.Series<Company,int>(
+        data: widget.companies,
         id: 'Open',
         domainFn: (Company cp,_) =>cp.serial,
         measureFn: (Company cp,_) =>cp.open
-      ),
-      charts.Series<Company,int>(
-        data: companies,
-        id: 'High',
-        displayName: 'High',
-        domainFn: (Company cp,_) =>cp.serial,
-        measureFn: (Company cp,_) =>cp.high
-      ),
-      charts.Series<Company,int>(
-        data: companies,
-        id: 'Close',
-        displayName: 'High',
+      )];
+      case('close'):
+        return [
+        charts.Series<Company,int>(
+        data: widget.companies,
+        id: 'Open',
         domainFn: (Company cp,_) =>cp.serial,
         measureFn: (Company cp,_) =>cp.close
-      )
-    ];
+      )];
+      case('high'):
+        return [
+        charts.Series<Company,int>(
+        data: widget.companies,
+        id: 'Open',
+        domainFn: (Company cp,_) =>cp.serial,
+        measureFn: (Company cp,_) =>cp.high
+      )];
+      default:
+        return [
+        charts.Series<Company,int>(
+        data: widget.companies,
+        id: 'Open',
+        domainFn: (Company cp,_) =>cp.serial,
+        measureFn: (Company cp,_) =>cp.volume
+      )];
+    }
   }
 }
