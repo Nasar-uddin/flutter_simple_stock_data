@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "580004198686",
+    "firebase_url": "https://vueapp-681ec.firebaseio.com",
+    "project_id": "vueapp-681ec",
+    "storage_bucket": "vueapp-681ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:580004198686:android:7ecd64e2d3f469f52c710f",
+        "android_client_info": {
+          "package_name": "com.example.stock_data"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "580004198686-t7jo4oaitrti5g93v7ropvov5l4kmdj2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE9kWq_FIl6pydRLD8T-wcyH_8uuDI3FQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "580004198686-t7jo4oaitrti5g93v7ropvov5l4kmdj2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
