@@ -2,7 +2,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:stock_data/models/company.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:stock_data/widgets/open_chart.dart';
 
 class DetailsView extends StatelessWidget {
@@ -35,13 +34,15 @@ class DetailsView extends StatelessWidget {
                 // convert this map into list
                 List<Map> data = [];
                 List<Company> cdata = [];
+                int serial = 1;
                 snapshot.data.value.forEach((key, value) {
                   data.add(value);
-                  cdata.add(new Company.fromMap(value));
-                  print(value);
+                  cdata.add(new Company.fromMap(value,serial));
+                  serial++;
+                  // print(value);
                 });
                 // print(snapshot.data.value['88']);
-                // print(cdata[0].toMap());
+                // print(cdata[4].toMap()['serial']+1);
                 // print(data);
                 return OpenChart(cdata);
               } else if (snapshot.hasError) {

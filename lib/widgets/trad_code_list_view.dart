@@ -5,7 +5,6 @@ import 'package:stock_data/screens/details_data_screen.dart';
 class TradCodeListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    firebaseTest('ACI');
     return Container(
       child: ListView.builder(
           itemCount: tradCodes.length,
@@ -36,9 +35,5 @@ class TradCodeListView extends StatelessWidget {
             );
           }),
     );
-  }
-
-  void firebaseTest(String code) async {
-
   }
 }

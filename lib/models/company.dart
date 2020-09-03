@@ -6,7 +6,7 @@ class Company {
   final String _closeName = 'close';
   final String _highName = 'high';
   final String _volumeName = 'volume';
-
+  int serial;
   String tradeCode;
   DateTime date;
   double open;
@@ -14,7 +14,8 @@ class Company {
   double high;
   int volume;
 
-  Company.fromMap(Map<dynamic, dynamic> map) {
+  Company.fromMap(Map<dynamic, dynamic> map,int srl) {
+    serial = srl;
     tradeCode = map[_tradeCodeName];
     open = double.parse(map[_openName]);
     close = double.parse(map[_closeName]);
@@ -31,7 +32,8 @@ class Company {
       _closeName: close,
       _highName: high,
       _volumeName: volume,
-      _dateName: date
+      _dateName: date,
+      'serial': serial
     };
   }
 }

@@ -9,15 +9,44 @@ class OpenChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return charts.LineChart(_lineChart(),animate: !true);
+  }
+
+  Container timeData() {
     return Container(
-      child: charts.TimeSeriesChart([
-                  charts.Series<Company, DateTime>(
-                      data: companies,
-                      id: 'Open',
-                      domainFn: (Company cmp, _) => cmp.date,
-                      measureFn: (Company cmp, _) => cmp.open
-                    )
-                ], animate: false),
-    );
+    child: charts.TimeSeriesChart([
+                charts.Series<Company, DateTime>(
+                    data: companies,
+                    id: 'Open',
+                    domainFn: (Company cmp, _) => cmp.date,
+                    measureFn: (Company cmp, _) => cmp.open
+                  )
+              ], animate: false),
+  );
+  }
+  List<charts.Series<Company,int>> _lineChart(){
+    
+    return [
+      charts.Series<Company,int>(
+        data: companies,
+        id: 'Open',
+        domainFn: (Company cp,_) =>cp.serial,
+        measureFn: (Company cp,_) =>cp.open
+      ),
+      charts.Series<Company,int>(
+        data: companies,
+        id: 'High',
+        displayName: 'High',
+        domainFn: (Company cp,_) =>cp.serial,
+        measureFn: (Company cp,_) =>cp.high
+      ),
+      charts.Series<Company,int>(
+        data: companies,
+        id: 'Close',
+        displayName: 'High',
+        domainFn: (Company cp,_) =>cp.serial,
+        measureFn: (Company cp,_) =>cp.close
+      )
+    ];
   }
 }
